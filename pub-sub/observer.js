@@ -10,10 +10,10 @@ class Subject {
     this.observerList.push(observer);
   }
 
-  removeObserver(observer) {
-    const index = this.observerList.findIndex(o => o.name === observer.name);
-    this.observerList.splice(index, 1);
-  }
+  // removeObserver(observer) {
+  //   const index = this.observerList.findIndex(o => o.name === observer.name);
+  //   this.observerList.splice(index, 1);
+  // }
 
   notifyObservers(message) {
     const observers = this.observerList;
@@ -26,9 +26,9 @@ class Observer {
 
   constructor(name, subject) {
     this.name = name;
-    if (subject) {
-      subject.addObserver(this);
-    }
+    // if (subject) {
+    //   subject.addObserver(this);
+    // }
   }
 
   notified(message) {

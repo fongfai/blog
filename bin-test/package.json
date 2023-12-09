@@ -1,0 +1,20 @@
+{
+  "name": "bin-test-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "le": "yarn && rm -rf ./node_modules/.bin/le  && ln -s  ./bin/index.js ./node_modules/.bin/le  && chmod 777 ./node_modules/.bin/le"
+  },
+  "bin": {
+    "mason3": "./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^1.0.0",
+    "g": "^2.0.1"
+  }
+}

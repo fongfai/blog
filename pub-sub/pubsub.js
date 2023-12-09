@@ -25,7 +25,16 @@ class PubSub {
   notify(type) {
     const messages = this.messages[type];
     const subscribers = this.listeners[type] || [];
-    subscribers.forEach((cb, index) => cb(messages[index]));
+    
+    // 按消息发布顺序 广播给订阅者
+    // subscribers.forEach((cb, index) => cb(messages[index]));
+    
+    // 将所有当前type下的信息广播给每个订阅者
+    subscribers.forEach((cb, index) => {
+      messages.forEach((msg, index) => {
+        cb(msg)
+      })
+    });
   }
 }
 
@@ -58,10 +67,10 @@ const pubsub = new PubSub();
 
 const publisherA = new Publisher('publisherA', pubsub);
 publisherA.publish(TYPE_A, 'we are young');
-publisherA.publish(TYPE_B, 'the silicon valley');
+// publisherA.publish(TYPE_B, 'the silicon valley');
 
-// const publisherB = new Publisher('publisherB', pubsub);
-// publisherB.publish(TYPE_A, 'stronger');
+const publisherB = new Publisher('publisherB', pubsub);
+publisherB.publish(TYPE_A, 'stronger');
 
 // const publisherC = new Publisher('publisherC', pubsub);
 // publisherC.publish(TYPE_C, 'a brief history of time');
@@ -69,6 +78,11 @@ publisherA.publish(TYPE_B, 'the silicon valley');
 const subscriberA = new Subscriber('subscriberA', pubsub);
 subscriberA.subscribe(TYPE_A, res => {
   console.log('subscriberA received', res)
+});
+
+const subscriberA2 = new Subscriber('subscriberA2', pubsub);
+subscriberA2.subscribe(TYPE_A, res => {
+  console.log('subscriberA2 received', res)
 });
 
 // const subscriberB = new Subscriber('subscriberB', pubsub);
@@ -81,5 +95,5 @@ subscriberC.subscribe(TYPE_B, res => {
 });
 
 pubsub.notify(TYPE_A);
-pubsub.notify(TYPE_B);
+// pubsub.notify(TYPE_B);
 // pubsub.notify(TYPE_C);
