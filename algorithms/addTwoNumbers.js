@@ -50,7 +50,9 @@ var addTwoNumbers = function (l1, l2) {
       tail.next = new ListNode(sum % 10);
       tail = tail.next;
     }
-    // 更新进位
+     /* 
+    这段代码 carry = Math.floor(sum / 10); 主要是用来更新进位的值。在进行两个数字相加的过程中，如果相加的结果大于等于10（即两个节点的值相加产生了进位），需要将这个进位部分留给下一位的计算。
+     */
     carry = Math.floor(sum / 10);
     // 移动到下一个节点，如果节点存在的话
     if (l1) {
