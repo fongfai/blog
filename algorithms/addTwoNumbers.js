@@ -39,16 +39,19 @@ var addTwoNumbers = function (l1, l2) {
       创建一个新的节点，节点的值为相加结果的个位数（sum % 10）。
       将头节点 head 和尾节点 tail 都指向这个新节点，因为这是第一个节点，所以它同时也是头节点和尾节点。
       如果结果链表不为空：
-
-      在已有的链表末尾添加一个新节点，节点的值同样是相加结果的个位数（sum % 10）。
-      将当前尾节点 tail 的 next 指针指向新创建的节点，然后更新尾节点 tail 为新添加的节点，使其成为新的尾节点。
-      这段代码的作用是根据结果链表是否为空，动态地创建新的节点并将其添加到结果链表的尾部。如果是第一个节点，就同时更新头节点和尾节点；如果已经有节点，就将新节点添加到尾节点后面，并更新尾节点指针。 */
+       */
     if (!head) {
       head = tail = new ListNode(sum % 10);
     } else {
-      // 若不为空，则将新节点连接到尾节点后面，并更新尾节点为新的节点
+      /* 
+      若不为空，则将新节点连接到尾节点后面，并更新尾节点为新的节点
+      在已有的链表末尾添加一个新节点，节点的值同样是相加结果的个位数（sum % 10）。
+      将当前尾节点 tail 的 next 指针指向新创建的节点，然后更新尾节点 tail 为新添加的节点，使其成为新的尾节点。
+      这段代码的作用是根据结果链表是否为空，动态地创建新的节点并将其添加到结果链表的尾部。如果是第一个节点，就同时更新头节点和尾节点；如果已经有节点，就将新节点添加到尾节点后面，并更新尾节点指针。 */
       tail.next = new ListNode(sum % 10);
+      console.log('tail1', tail);
       tail = tail.next;
+      console.log('tail2', tail)
     }
      /* 
     这段代码 carry = Math.floor(sum / 10); 主要是用来更新进位的值。在进行两个数字相加的过程中，如果相加的结果大于等于10（即两个节点的值相加产生了进位），需要将这个进位部分留给下一位的计算。
@@ -78,10 +81,12 @@ var addTwoNumbers = function (l1, l2) {
 const head13 = new ListNode(3);
 const head12 = new ListNode(4, head13);
 const l1 = new ListNode(2, head12);
+/* [2, 4, 3] */
 
 const head23 = new ListNode(4);
 const head22 = new ListNode(6, head23);
 const l2 = new ListNode(5, head22);
+/* [5, 6, 4] */
 
 const result = addTwoNumbers(l1, l2);
 console.log(result);

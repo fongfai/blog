@@ -32,32 +32,32 @@ let input = [
   },
 ];
 
-// function arr2tree(arr) {
-//   // record arr elemet
-//   const map = {};
+function arr2tree(arr) {
+  // record arr elemet
+  const map = {};
 
-//   let tree = [];
+  let tree = [];
 
-//   for (var i = 0; i < arr.length; i++) {
-//     map[arr[i].id] = i;
-//     arr[i].children = [];
-//   }
+  for (var i = 0; i < arr.length; i++) {
+    map[arr[i].id] = i;
+    arr[i].children = [];
+  }
 
-//   for (var i = 0; i < arr.length; i++) {
-//     const ele = arr[i];
-//     const { id, parentId } = ele;
-//     // root node
-//     const parentIndex = map[parentId];
-//     if (parentId) {
-//       console.log(" map[parentIndex]", map[parentIndex]);
-//       arr[parentIndex].children.push(ele);
-//     } else {
-//       tree.push(ele);
-//     }
-//   }
-//   console.log(JSON.stringify(tree));
-//   return tree;
-// }
+  for (var i = 0; i < arr.length; i++) {
+    const ele = arr[i];
+    const { id, parentId } = ele;
+    // root node
+    const parentIndex = map[parentId];
+    if (parentId) {
+      console.log(" map[parentIndex]", map[parentIndex]);
+      arr[parentIndex].children.push(ele);
+    } else {
+      tree.push(ele);
+    }
+  }
+  console.log(JSON.stringify(tree));
+  return tree;
+}
 
 // arr2tree(input)
 // arr2tree(

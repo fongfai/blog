@@ -1,3 +1,46 @@
+/* 简要实现
+
+JavaScript中实现深克隆的原理是通过递归地复制对象的所有属性，包括复杂对象内部的嵌套对象，直到只剩下基本数据类型（如字符串、数字、布尔值等）为止。深克隆解决了浅克隆只复制对象引用的问题，确保原始对象和克隆对象在内存中是完全独立的。
+
+下面是实现深克隆的基本步骤：
+
+检查被克隆的对象是否是基本数据类型，如果是，直接返回其值。
+检查对象是否是日期（Date）或正则表达式（RegExp）类型的对象，因为这些类型的对象也需要特殊处理。
+创建一个新对象或数组，用来存放克隆后的数据。
+遍历原对象的所有可枚举属性，包括数组的每个元素。
+对每个属性或元素递归调用深克隆函数。
+处理循环引用的问题，避免无限递归。可以通过使用一个Map或其他结构来跟踪已经克隆过的对象。
+返回新对象，保证新对象与原对象在结构和数据上完全一致，但在内存中是独立分离的。
+*/
+
+function deepClone(obj, hash = new WeakMap()) {
+  if (obj === null) return null;
+  if (typeof obj !== 'object') return obj;
+  if (obj instanceof Date) return new Date(obj);
+  if (obj instanceof RegExp) return new RegExp(obj);
+
+  if (hash.has(obj)) return hash.get(obj); // 处理循环引用
+  // 保留对象原型上的数据
+  let cloneObj = new obj.constructor();
+  hash.set(obj, cloneObj);
+
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      // 递归克隆每个属性值
+      cloneObj[key] = deepClone(obj[key], hash);
+    }
+  }
+  return cloneObj;
+}
+// 使用例子
+const original = { a: 1, b: { c: 2 } };
+const cloned = deepClone(original);
+console.log(cloned); // {a: 1, b: {c: 2}}
+
+
+
+/* 详细实现 */
+
 const mapTag = "[object Map]";
 const setTag = "[object Set]";
 const arrayTag = "[object Array]";

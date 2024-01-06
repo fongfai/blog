@@ -1,5 +1,43 @@
+
+
+// 作者：Romantic Ardinghellix4s
+// 链接：https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/
+// 来源：力扣（LeetCode）
+// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+//滑动窗口 (https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/zi-jie-leetcode3wu-zhong-fu-zi-fu-de-zui-chang-zi-/
+var lengthOfLongestSubstring = function (s) {
+  // 哈希集合，记录每个字符是否出现过
+  const occ = new Set();
+  const n = s.length;
+  // 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
+  let rk = -1, ans = 0;
+  for (let i = 0; i < n; ++i) {
+    if (i != 0) {
+      // 左指针向右移动一格，移除一个字符
+      console.log('occ', Array.from(occ))
+      const r = occ.delete(s.charAt(i - 1));
+      console.log('i', i, s.charAt(i - 1), Array.from(occ))
+    }
+    console.log('while-', rk + 1, Array.from(occ), s.charAt(rk + 1))
+    while (rk + 1 < n && !occ.has(s.charAt(rk + 1))) {
+      // 不断地移动右指针
+      occ.add(s.charAt(rk + 1));
+      ++rk;
+    }
+    // 第 i 到 rk 个字符是一个极长的无重复字符子串
+    ans = Math.max(ans, rk - i + 1);
+  }
+  return ans;
+};
+
+// 时间复杂度为O(n)
+
+
 //给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
 
+// 用left和right两个指针, right指针前移的时候, 去检测max值, left指针前移的时候，直接进去下一个循环
+// https://leetcode.cn/problems/longest-substring-without-repeating-characters/solutions/1538157/jsjie-ti-si-lu-qing-xi-ming-liao-by-inte-c9re/
 var lengthOfLongestSubstring = function (str) {
   if (str.length <= 1) {
     return str.length;
@@ -22,40 +60,11 @@ var lengthOfLongestSubstring = function (str) {
   }
   return max;
 };
+// 时间复杂度为O(n^2)
 
-// 作者：Romantic Ardinghellix4s
-// 链接：https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/
-// 来源：力扣（LeetCode）
-// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
-//滑动窗口 (https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/zi-jie-leetcode3wu-zhong-fu-zi-fu-de-zui-chang-zi-/
-var lengthOfLongestSubstring2 = function (s) {
-  // 哈希集合，记录每个字符是否出现过
-  const occ = new Set();
-  const n = s.length;
-  // 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
-  let rk = -1,
-    ans = 0;
-  for (let i = 0; i < n; ++i) {
-    if (i != 0) {
-      // 左指针向右移动一格，移除一个字符
-      const str = s.charAt(i - 1);
-      occ.has(str) && occ.delete(str);
-    }
-    const right = rk + 1;
-    const str = s.charAt(right);
-    while (right < n && !occ.has(str)) {
-      // 不断地移动右指针
-      occ.add(str);
-      ++rk;
-    }
-    // 第 i 到 rk 个字符是一个极长的无重复字符子串
-    ans = Math.max(ans, rk - i + 1);
-  }
-  return ans;
-};
 
-/* 方法二： */
+/* 方法三： */
 var lengthOfLongestSubstring3 = function (s) {
   let map = new Map(),
     max = 0;

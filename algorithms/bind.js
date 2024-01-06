@@ -5,10 +5,10 @@ Function.prototype.bind = function () {
   // 保存当前的函数
   var func = this;
   // 获取其他的参数
-  var thisArgs = Array.prototype.slice.call(args, 1);
+  var thisArgs = args.slice(1);// Array.prototype.slice.call(args, 1);
   return function () {
     // 将两次获取到的参数合并
-    Array.prototype.push.apply(thisArgs, arguments);
+    thisArgs.push(arguments);// Array.prototype.push.apply(thisArgs, arguments);
     // 使用apply改变上下文
     return func.apply(context, thisArgs);
   };

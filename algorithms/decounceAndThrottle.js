@@ -54,7 +54,7 @@ function throttle(fn, interval, leading = true) {
       // 获取当前时间
       const nowTime = new Date().getTime()
       
-      // 第一次不需要立即执行
+      // 第一次立即执行
       if (!leading && isLeading) {
           // 将lastTime设置为nowTime，这样就不会导致第一次时remainTime大于interval
           lastTime = nowTime
