@@ -1,18 +1,23 @@
 const path = require("path");
 const webpack = require('webpack')
 const FirstPlugin = require('./first.js');
+const HelloPlugin = require('./hello.js')
 const HelloWorldPlugin = require('./hello')
 
 
+// console.log("webpack", webpack)
+
 module.exports = {
-  // mode: 'development',
-  entry: path.resolve(__dirname, "index.js"),
+  mode: 'development',
+  mode: 'production',
+  entry: path.resolve(__dirname, "treeShaking/index.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[contenthash].js",
+    // filename: "[name].[contenthash].js",
   },
   optimization: {
-    splitChunks: {
+    usedExports: true,
+   /*  splitChunks: {
       chunks: "all", // 默认 async 可选值 all 和 initial
       maxInitialRequests: Infinity, // 一个入口最大的并行请求数
       minSize: 0, // 避免模块体积过小而被忽略
@@ -29,10 +34,11 @@ module.exports = {
           },
         },
       },
-    },
+    }, */
   },
   plugins: [
-    new FirstPlugin()
+    new HelloPlugin(),
+    new FirstPlugin(),
     // new webpack.HashedModuleIdsPlugin(), // 根据模块的相对路径生成 HASH 作为模块 ID
   ],
 };

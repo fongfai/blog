@@ -9,10 +9,11 @@
   },
   "author": "",
   "license": "ISC",
+  "sideEffects": true,
   "dependencies": {
     "axios": "^0.24.0",
     "lodash": "^4.17.21",
-    "webpack": "5"
+    "webpack": "^4.47.0"
   },
   "devDependencies": {
     "webpack-cli": "^4.9.1"

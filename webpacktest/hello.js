@@ -3,9 +3,10 @@ function HelloWorldPlugin(options) {
 }
 
 HelloWorldPlugin.prototype.apply = function(compiler) {
-  console.log(compiler, 'Hello World!');
-  compiler.plugin('done', function() {
+  console.log('HelloWorldPlugin-start!');
+  compiler.plugin('emit', function(compiliation, callback) {
     console.log('Hello World!');
+    callback()
   });
 };
 

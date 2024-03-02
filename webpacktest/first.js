@@ -3,9 +3,10 @@ class FirstPlugin{
     this.options = options
   }
   apply(compiler){
+    console.log('FirstPlugin-start')
     //compiler.plugin("emit", ) v4
     compiler.hooks.emit.tapAsync('FirstPlugin',(compilation,callback)=>{
-      console.log('FirstPlugin', compilation)
+      console.log('FirstPlugin', 'emit')
       let str = ''
       for (let filename in compilation.assets){
         str += `文件:${filename}  大小${compilation.assets[filename]['size']()}\n`
