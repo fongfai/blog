@@ -8,12 +8,34 @@ const HelloWorldPlugin = require('./hello')
 // console.log("webpack", webpack)
 
 module.exports = {
-  mode: 'development',
+  // mode: 'development',
   mode: 'production',
+  devtool: 'source-map',
   entry: path.resolve(__dirname, "treeShaking/index.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
     // filename: "[name].[contenthash].js",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: path.resolve(__dirname,'./loader/index.js')
+        }
+      }
+    ]
   },
   optimization: {
     usedExports: true,
@@ -37,8 +59,8 @@ module.exports = {
     }, */
   },
   plugins: [
-    new HelloPlugin(),
-    new FirstPlugin(),
+    // new HelloPlugin(),
+    // new FirstPlugin(),
     // new webpack.HashedModuleIdsPlugin(), // 根据模块的相对路径生成 HASH 作为模块 ID
   ],
 };

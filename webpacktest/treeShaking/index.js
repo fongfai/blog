@@ -1,11 +1,7 @@
 "use strict";
-// index.js
 
-// import { sum } from "./util";
-// import * as math from "./utils";
-// console.log(sum, sum(1, 2));
+import { sum, combine } from "./util";
+console.log(sum(1, 2));
 
-// side effect  https://cloud.tencent.com/developer/article/2182438
-import './a.js'
-import './b.js'
 
+console.log(combine({a: 1}, {b: 2}))
