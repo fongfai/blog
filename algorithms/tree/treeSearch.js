@@ -52,14 +52,14 @@ const tree = [
     var retNode = null;
     function deepSearch(tree, id) {
       for (var i = 0; i < tree.length; i++) {
-        const children = tree[i].children
-        if (children?.length > 0) {
-          deepSearch(children, id);
-        }
         if (id === tree[i].id || isGet) {
           isGet || (retNode = tree[i]);
           isGet = true;
           break;
+        }
+        const children = tree[i].children
+        if (children?.length > 0) {
+          deepSearch(children, id);
         }
       }
     }

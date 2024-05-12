@@ -23,13 +23,14 @@ const listTree = [
   },
 ];
 
+
 // 递归
 {
   //如何将树形结构转换为有父子关系属性的数组结构
   function flatten2(data, pid) {
     return data.reduce(
-      (arr, { id, name, children = [] }) =>
-        arr.concat([{ id, name, pid }], flatten2(children, id)),
+      (arr, { id, val, children = [] }) =>
+        arr.concat([{ id, val, pid }], flatten2(children, id)),
       []
     );
   }

@@ -10,9 +10,13 @@ function flatten(arr) {
 flatten(arr1); //[1, 2, 3, 1, 2, 3, 4, 2, 3, 4]
 
 
-function flattenV2(arr) {
-    return arr.reduce(function(pre, cur){
-        return pre.concat(Array.isArray(cur) ? flatten(cur) : cur)
+{
+
+  function flattenV2(arr) {
+    return arr.reduce(function (pre, cur) {
+      return pre.concat(Array.isArray(cur) ? flattenV2(cur) : cur)
     }, [])
+  }
+  console.log('v2', flattenV2(arr1));//  [1, 2, 3, 4，5]
+
 }
-console.log(flattenV2(arr));//  [1, 2, 3, 4，5]

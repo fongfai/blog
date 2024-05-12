@@ -37,6 +37,7 @@ function compose (middleware) {
       index = i
       let fn = middleware[i]
       if (i === middleware.length) fn = next
+      //最后一个中间件执行完毕，开始回溯
       if (!fn) return Promise.resolve()
       try {
         return Promise.resolve(fn(context, dispatch.bind(null, i + 1)))
