@@ -48,23 +48,22 @@ const tree = [
 //深度优先
 {
   function deepQuery(tree, id) {
-    var isGet = false;
-    var retNode = null;
-    function deepSearch(tree, id) {
-      for (var i = 0; i < tree.length; i++) {
-        if (id === tree[i].id || isGet) {
-          isGet || (retNode = tree[i]);
-          isGet = true;
-          break;
+    function deepSearch(nodes) {
+      for (const node of nodes) {
+        if (node.id === id) {
+          return node; // 找到节点后立即返回
         }
-        const children = tree[i].children
-        if (children?.length > 0) {
-          deepSearch(children, id);
+        if (node.children) {
+          const foundNode = deepSearch(node.children);
+          if (foundNode) {
+            return foundNode; // 如果子节点中找到了节点，也立即返回
+          }
         }
       }
+      return null; // 未找到节点
     }
-    deepSearch(tree, id);
-    return retNode;
+    
+    return deepSearch(tree);
   }
 }
 //广度优先
